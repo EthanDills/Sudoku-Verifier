@@ -4,7 +4,7 @@
 # Input 2D Array
     # sudoku = [[],[], ...]
 # Compute Sudoku solution
-    # 
+    # find out which numbers aren't in the first row
 # Output solved sudoku
     # print(sudoku solution)
 # 
