@@ -1,6 +1,18 @@
 ''' Outputs whether a sudoku map of 9 by 9 is valid'''
 
 # Input
+'''
+baseline_correct =[   [3, 1, 6, 5, 7, 8, 4, 9, 2],
+            [5, 2, 9, 1, 3, 4, 7, 6, 8],
+            [4, 8, 7, 6, 2, 9, 5, 3, 1],
+            [2, 6, 3, 4, 1, 5, 9, 8, 7],
+            [9, 7, 4, 8, 6, 3, 1, 2, 5],
+            [8, 5, 1, 7, 9, 2, 6, 4, 3],
+            [1, 3, 8, 9, 4, 7, 2, 5, 6],
+            [6, 9, 2, 3, 5, 1, 8, 7, 4],
+            [7, 4, 5, 2, 8, 6, 3, 1, 9],
+        ]
+'''
 sudoku =[   [3, 1, 6, 5, 7, 8, 4, 9, 2],
             [5, 2, 9, 1, 3, 4, 7, 6, 8],
             [4, 8, 7, 6, 2, 9, 5, 3, 1],
@@ -12,45 +24,51 @@ sudoku =[   [3, 1, 6, 5, 7, 8, 4, 9, 2],
             [7, 4, 5, 2, 8, 6, 3, 1, 9],
         ]
 n = 9 # length (and width) of the sudoku map. Should be a perfect square number
-expected_total = (n*(n+1))/2 # closed form solution to 1 + 2 + 3 .... + n
-
+print(len(sudoku))
 # Compute
 '''If there's a repeat in a column, row, or box, then it isn't valid'''
 
-'''each column, row, and 'box' must add up to expected_total'''
-
-''' Loop through each row, and check that it adds up to total. 
-    If it doesn't add up to total, output such. Repeat with columns and boxes.
+''' Loop through each row, and check for duplicates and that each cell is between 1 and 9.
+    If there are duplicates / any cells aren't between 1 and 9, output such.
     - Rows: Iteration, Case Analysis
     - Columns: Iteration, Case Analysis
     - Boxes: Iteration, Case Analysis
     '''
+# check rows
+    # check duplicates and that each value is between 1 and 9
+r = 0 # starting row
+c = 0 # starting column
+
+def compute_rows():
+    r = 0
+    c = 0
+    while(r<n and sudoku[r][c] < 10 and sudoku[r][c] > 0): # while we haven't gone off the edge, and each value is between 1 and 9
+        c = 0
+        j = 1
+        while(c < len(sudoku)-1): # compare duplicates after A[k] (nothing after A[n-1], so only have to stop at A[n-2])
+            
+            while(j < len(sudoku) and sudoku[r][c] != sudoku[r][j]): # compare each value between A[k+1] to A[n-1]
+                # print("sudoku[" + r.__str__() + "][" + c.__str__() + "] doesn't equal sudoku[" + r.__str__() + "][" + j.__str__() + "]")
+                # print("sudoku[" + r.__str__() + "][" + c.__str__() + "]: " + sudoku[r][c].__str__() )
+                # print("sudoku[" + r.__str__() + "][" + j.__str__() + "]: " + sudoku[r][j].__str__() )
+                j += 1
+
+            if(j <= len(sudoku)-1): # if j doesn't equal n-1, then we found a duplicate
+                # print("sudoku[" + r.__str__() + "][" + c.__str__() + "] equals sudoku[" + r.__str__() + "][" + j.__str__() + "]")
+                # print("sudoku[" + r.__str__() + "][" + c.__str__() + "]: " + sudoku[r][c].__str__() )
+                # print("sudoku[" + r.__str__() + "][" + j.__str__() + "]: " + sudoku[r][j].__str__() )
+                return -1
+            else:
+                # print("iterating c and j")
+                c += 1
+                j = c+1
+                # print("column: " + c.__str__())
+                # print("row: " + r.__str__())
+                
 
 
-
-''' Let i = 0 such that i < n, where i represents the current row in a 2D array. Let row_total equal 
-    the sum of all elements in the current row, and compare it to expected_total'''
-row_total = expected_total # initialized as a valid value to pass the condition on the first iteration
-i = 0
-while (i < n and row_total == expected_total): 
-    
-    # loop through the ENTIRE current row, and add up each element of the row
-    row_total = 0
-    for j in range(len(sudoku[i])):
-        row_total += sudoku[i][j]
-    i += 1
-        
-    
-    # Check each column
-    # Check each box (change of coordinate systems)
-
-
-if(i < n-1):
+if(compute_rows()==-1): # if we didn't reach the end, it isn't valid
     print("not valid")
 else:
     print("valid so far")
 # Output
-# if (is_valid):
-#     print("valid")
-# else:
-#     print("not valid")

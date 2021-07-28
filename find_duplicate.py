@@ -3,7 +3,7 @@ for given array A of size n, determine whether there are any duplicate values in
 '''
 
 # Input array
-A = [1, 2, 3, 4, 5, 6, 7, 8, 9,]
+A = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Compute ( determine existence of duplicate )
     ## could stop at any point
