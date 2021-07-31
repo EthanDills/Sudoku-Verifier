@@ -24,6 +24,7 @@ sudoku =[   [3, 1, 6, 5, 7, 8, 4, 9, 2],
             [7, 4, 5, 2, 8, 6, 3, 1, 9],
         ]
 n = 9 # length (and width) of the sudoku map. Should be a perfect square number
+print("something")
 print(len(sudoku))
 # Compute
 '''If there's a repeat in a column, row, or box, then it isn't valid'''
@@ -38,14 +39,14 @@ print(len(sudoku))
     # check duplicates and that each value is between 1 and 9
 r = 0 # starting row
 c = 0 # starting column
-
 def compute_rows():
     r = 0
     c = 0
+    print("compute_rows() called")
     while(r<n and sudoku[r][c] < 10 and sudoku[r][c] > 0): # while we haven't gone off the edge, and each value is between 1 and 9
         c = 0
         j = 1
-        while(c < len(sudoku)-1): # compare duplicates after A[k] (nothing after A[n-1], so only have to stop at A[n-2])
+        while(c < n-1): # compare duplicates after A[k] (nothing after A[n-1], so only have to stop at A[n-2])
             
             while(j < len(sudoku) and sudoku[r][c] != sudoku[r][j]): # compare each value between A[k+1] to A[n-1]
                 # print("sudoku[" + r.__str__() + "][" + c.__str__() + "] doesn't equal sudoku[" + r.__str__() + "][" + j.__str__() + "]")
@@ -64,11 +65,33 @@ def compute_rows():
                 j = c+1
                 # print("column: " + c.__str__())
                 # print("row: " + r.__str__())
-                
+            
+        r+=1
+    
+def compute_columns():
+    r = 0
+    c = 0
+    print("compute_columns called")
+    while(c<n and sudoku[r][c] < 10 and sudoku[r][c] > 0): # while we haven't gone off the edge, and each value is between 1 and 9
+        r = 0
+        j = 1
+        while(r < n-1): # compare duplicates after A[k] (nothing after A[n-1], so only have to stop at A[n-2]) 
+            while(j < len(sudoku) and sudoku[r][c] != sudoku[j][c]): # compare each value between A[k+1] to A[n-1]
+                j += 1
+            if(j <= len(sudoku)-1): # if j doesn't equal n-1, then we found a duplicate
+                return -1
+            else:
+                r += 1
+                j = r+1
+        c+=1
+        
 
 
-if(compute_rows()==-1): # if we didn't reach the end, it isn't valid
+if(compute_rows()==-1 or compute_columns()==-1): # if we didn't reach the end, it isn't valid
     print("not valid")
 else:
     print("valid so far")
+
+
+
 # Output
