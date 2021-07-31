@@ -24,8 +24,7 @@ sudoku =[   [3, 1, 6, 5, 7, 8, 4, 9, 2],
             [7, 4, 5, 2, 8, 6, 3, 1, 9],
         ]
 n = 9 # length (and width) of the sudoku map. Should be a perfect square number
-print("something")
-print(len(sudoku))
+print(n/2)
 # Compute
 '''If there's a repeat in a column, row, or box, then it isn't valid'''
 
@@ -43,7 +42,7 @@ def compute_rows():
     r = 0
     c = 0
     print("compute_rows() called")
-    while(r<n and sudoku[r][c] < 10 and sudoku[r][c] > 0): # while we haven't gone off the edge, and each value is between 1 and 9
+    while(r<n and sudoku[r][c] <= n and sudoku[r][c] > 0): # while we haven't gone off the edge, and each value is between 1 and 9
         c = 0
         j = 1
         while(c < n-1): # compare duplicates after A[k] (nothing after A[n-1], so only have to stop at A[n-2])
@@ -85,7 +84,12 @@ def compute_columns():
                 j = r+1
         c+=1
         
+# def compute_boxes():
+    # there are n boxes
+    # need to find duplicates inside the box
 
+
+    #
 
 if(compute_rows()==-1 or compute_columns()==-1): # if we didn't reach the end, it isn't valid
     print("not valid")
