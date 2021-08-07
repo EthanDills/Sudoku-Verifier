@@ -15,8 +15,6 @@ baseline_correct =[   [3, 1, 6, 5, 7, 8, 4, 9, 2],
 '''
 from typing import List
 from math import sqrt
-from typing_extensions import IntVar
-
 
 sudoku =[   [3, 1, 6, 5, 7, 8, 4, 9, 2],
             [5, 2, 9, 1, 3, 4, 7, 6, 8],
@@ -29,7 +27,6 @@ sudoku =[   [3, 1, 6, 5, 7, 8, 4, 9, 2],
             [7, 4, 5, 2, 8, 6, 3, 1, 9],
         ]
 n = len(sudoku) # length (and width) of the sudoku map. Should be a perfect square number
-
 
 # Compute
 # check rows, columns, and boxes
@@ -44,24 +41,14 @@ def compute_rows():
         c = 0
         j = 1
         while(c < n-1): # compare duplicates after A[k] (nothing after A[n-1], so only have to stop at A[n-2])
-            
             while(j < n and sudoku[r][c] != sudoku[r][j]): # compare each value between A[k+1] to A[n-1]
-                # print("sudoku[" + r.__str__() + "][" + c.__str__() + "] doesn't equal sudoku[" + r.__str__() + "][" + j.__str__() + "]")
-                # print("sudoku[" + r.__str__() + "][" + c.__str__() + "]: " + sudoku[r][c].__str__() )
-                # print("sudoku[" + r.__str__() + "][" + j.__str__() + "]: " + sudoku[r][j].__str__() )
                 j += 1
-
             if(j <= n-1): # if j doesn't equal n-1, then we found a duplicate
-                # print("sudoku[" + r.__str__() + "][" + c.__str__() + "] equals sudoku[" + r.__str__() + "][" + j.__str__() + "]")
-                # print("sudoku[" + r.__str__() + "][" + c.__str__() + "]: " + sudoku[r][c].__str__() )
-                # print("sudoku[" + r.__str__() + "][" + j.__str__() + "]: " + sudoku[r][j].__str__() )
                 return -1
             else:
                 # print("iterating c and j")
                 c += 1
                 j = c+1
-                # print("column: " + c.__str__())
-                # print("row: " + r.__str__())
             
         r+=1
     
